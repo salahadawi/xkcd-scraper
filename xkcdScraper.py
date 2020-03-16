@@ -2,13 +2,19 @@
 
 import requests, sys, bs4, os, re
 
-i = 1
+try:
+	i = int(sys.argv[1])
+	if i < 1:
+		i = 1
+except:
+	i = 1
+
 try:
 	os.mkdir("xkcd")
 except:
 	pass
 
-res = requests.get("http://xkcd.com/1")
+res = requests.get("http://xkcd.com/" + str(i))
 res.raise_for_status()
 while(1):
 	soup = bs4.BeautifulSoup(res.text, "html.parser")
